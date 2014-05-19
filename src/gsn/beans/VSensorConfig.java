@@ -64,13 +64,17 @@ public class VSensorConfig implements Serializable {
 
 	private KeyValue[]                 addressing                             ;
 
-	private DataField []                outputStructure                        ;
+	//private DataField []                outputStructure                        ;
+	
+	private OutputStream [] outputStreams;
 
 	private String                                 webParameterPassword                             = null;
 
 	private String                                 storageHistorySize                               = null;
 
 	private final HashMap < String , InputStream > inputStreamNameToInputStreamObjectMapping = new HashMap < String , InputStream >();
+	
+	private final HashMap < String , OutputStream > outputStreamNameToOutputStreamObjectMapping = new HashMap < String , OutputStream >();
 
 	private  InputStream        inputStreams  []                            ;
 
@@ -111,14 +115,27 @@ public class VSensorConfig implements Serializable {
 			}
 		return toReturn;
 	}
-
-	public String[][] getRPCFriendlyOutputStructure() {
-		String[][] toReturn = new String[this.outputStructure.length][2] ;
-		for(int i=0;i<outputStructure.length;i++){
-			toReturn[i][0] = ( String ) outputStructure[i].getName();
-			toReturn[i][1] = ( String ) outputStructure[i].getType();
+	
+	public String[][] getRPCFriendlyOutputStructure(String outputName) {
+		String[][] toReturn = new String[this.getOutputStructure(outputName).length][2] ;
+		for(int i=0;i<getOutputStructure(outputName).length;i++){
+			toReturn[i][0] = ( String ) getOutputStructure(outputName)[i].getName();
+			toReturn[i][1] = ( String ) getOutputStructure(outputName)[i].getType();
 		}
 		return toReturn;
+	}
+
+	private DataField[] getOutputStructure(String outputName) {
+		return this.outputStreamNameToOutputStreamObjectMapping.get(outputName).getStructure(); 
+	}
+
+	/**
+	 * @deprecated Please use the getRPCFriendlyOutputStructure(String outputName) instead.
+	 * @return
+	 */
+	@Deprecated
+	public String[][] getRPCFriendlyOutputStructure() {
+		return getRPCFriendlyOutputStructure(outputStreams[0].getOutputStreamName());
 	}
 
 
@@ -180,9 +197,11 @@ public class VSensorConfig implements Serializable {
 
 	/**
 	 * @return Returns the outputStructure.
+	 * @deprecated please use getOutputStructure(String outputName)
 	 */
+	@Deprecated
 	public  DataField [] getOutputStructure ( ) {
-		return this.outputStructure;
+		return getOutputStructure(outputStreams[0].getOutputStreamName());
 	}
 
 	/**
@@ -248,9 +267,10 @@ public class VSensorConfig implements Serializable {
 
 	/**
 	 * @param outputStructure The outputStructure to set.
+	 * @deprecated access it directly in the outputStream object
 	 */
 	public void setOutputStructure ( DataField[] outputStructure) {
-		this.outputStructure = outputStructure;
+		this.outputStreams[0].setStructure(outputStructure);
 	}
 
 	/**
@@ -341,7 +361,8 @@ public class VSensorConfig implements Serializable {
 		storageHistorySize = storageHistorySize.replace( " " , "" ).trim( ).toLowerCase( );
 		for ( final InputStream inputStream : this.inputStreams )
 			this.inputStreamNameToInputStreamObjectMapping.put( inputStream.getInputStreamName( ) , inputStream );
-
+		for ( final OutputStream outputStream : this.outputStreams )
+			this.outputStreamNameToOutputStreamObjectMapping.put( outputStream.getOutputStreamName( ) , outputStream );
 		if ( storageHistorySize.equalsIgnoreCase( "0" ) ) return true;
 		final int second = 1000;
 		final int minute = second * 60;
@@ -423,7 +444,7 @@ public class VSensorConfig implements Serializable {
 		builder.append( "]" );
 		return "VSensorConfig{" + "name='" + this.name + '\'' + ", priority=" + this.priority + ", mainClass='" + this.mainClass + '\'' 
 		+ ", description='" + this.description + '\'' + ", outputStreamRate=" + this.outputStreamRate
-		+ ", addressing=" + this.addressing + ", outputStructure=" + this.outputStructure + ", storageHistorySize='" + this.storageHistorySize + '\'' + builder.toString( )
+		+ ", addressing=" + this.addressing + ", numOutputStructure=" + outputStreams.length + ", storageHistorySize='" + this.storageHistorySize + '\'' + builder.toString( )
 		+ ", mainClassInitialParams=" + this.mainClassInitialParams + ", lastModified=" + this.lastModified + ", fileName='" + this.fileName + '\'' + ", logger=" + this.logger + ", nameInitialized="
 		+ this.nameInitialized + ", isStorageCountBased=" + this.isStorageCountBased + ", parsedStorageSize=" + this.parsedStorageSize + '}';
 	}

@@ -23,7 +23,14 @@
 	          <value name="password"  field="webParameterPassword" style="attribute" usage="optional" />
    	          <collection field="webinput"  item-type="gsn.beans.WebInput" />
          </structure>
-       <collection name="output-structure"   field="outputStructure"  item-type="gsn.beans.DataField" />
+       <collection field="outputStreams">
+       		 <structure name="output-structure" type="gsn.beans.OutputStream">
+                <value name="name"  field="outputStreamName" style="attribute" usage="optional" />
+                <collection field="structure" item-type="gsn.beans.DataField"/>
+             </structure>
+       </collection>
+       
+          <!-- <value name="name" style="attribute" usage="optional" />       </collection> -->
        </structure>
        <value name="description" field="description"  usage="optional"/>
        <!-- life-cycle and its content is deprecated -->
