@@ -113,22 +113,24 @@ public class VirtualSensor {
     public void dispose() {
     }
 
-    // apply the storage size parameter to the virtual sensor table
+    /**
+     *  apply the storage size parameter to the virtual sensor table
+     */
     public void DoUselessDataRemoval() {
         if (config.getParsedStorageSize() == VSensorConfig.STORAGE_SIZE_NOT_SET) return;
         StringBuilder query;
 
         if (config.isStorageCountBased()) {
-            query = Main.getStorage(config.getName()).getStatementRemoveUselessDataCountBased(config.getName(), config.getParsedStorageSize());
+            query = Main.getStorage(config.getName()).getStatementRemoveUselessDataCountBased(config.getName(), config.getOutputStreams(),config.getParsedStorageSize());
         }
         else {
-            query = Main.getStorage(config.getName()).getStatementRemoveUselessDataTimeBased(config.getName(), config.getParsedStorageSize());
+            query = Main.getStorage(config.getName()).getStatementRemoveUselessDataTimeBased(config.getName(), config.getOutputStreams(),config.getParsedStorageSize());
         }
 
         int effected = 0;
         try {
             if (logger.isDebugEnabled())
-                logger.debug("Enforcing the limit size on the VS table by : " + query);
+                logger.debug("Enforcing the limit size on the VS tables by : " + query);
             effected = Main.getStorage(config.getName()).executeUpdate(query);
         } catch (SQLException e) {
             logger.error("Error in executing: " + query);

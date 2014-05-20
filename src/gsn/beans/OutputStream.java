@@ -12,7 +12,7 @@ public class OutputStream implements Serializable {
 	
 	private DataField[] structure;
 	
-	private transient VirtualSensor virtualsensor;
+	private transient VSensorConfig virtualsensor;
 	
 	private String outputStreamName;
 
@@ -20,11 +20,11 @@ public class OutputStream implements Serializable {
 		return structure;
 	}
 
-	public VirtualSensor getVirtualsensor() {
+	public VSensorConfig getVirtualsensor() {
 		return virtualsensor;
 	}
 
-	public void setVirtualsensor(VirtualSensor virtualsensor) {
+	public void setVirtualsensor(VSensorConfig virtualsensor) {
 		this.virtualsensor = virtualsensor;
 	}
 
@@ -42,6 +42,10 @@ public class OutputStream implements Serializable {
 
 	public void setStructure(DataField[] structure) {
 		this.structure = structure;
+	}
+	
+	public String getTableName(){
+		return virtualsensor.getName() + "_" + getOutputStreamName();
 	}
 	
 

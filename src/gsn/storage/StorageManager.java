@@ -36,6 +36,7 @@ package gsn.storage;
 import gsn.Main;
 import gsn.beans.DataField;
 import gsn.beans.DataTypes;
+import gsn.beans.OutputStream;
 import gsn.beans.StreamElement;
 import gsn.http.datarequest.AbstractQuery;
 import gsn.storage.hibernate.DBConnectionInfo;
@@ -45,6 +46,7 @@ import gsn.utils.ValidityTools;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.commons.dbcp.*;
 import org.apache.log4j.Logger;
@@ -134,9 +136,9 @@ public abstract class StorageManager {
     }
 
 
-    public abstract StringBuilder getStatementRemoveUselessDataCountBased(String virtualSensorName, long storageSize) ;
+    public abstract StringBuilder getStatementRemoveUselessDataCountBased(String virtualSensorName, Collection<OutputStream> collection, long storageSize) ;
 
-    public StringBuilder getStatementRemoveUselessDataTimeBased(String virtualSensorName, long storageSize) {
+    public StringBuilder getStatementRemoveUselessDataTimeBased(String virtualSensorName, Collection<OutputStream> collection, long storageSize) {
         StringBuilder query = null;
         long timedToRemove = -1;
         Connection conn = null;

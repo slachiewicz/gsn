@@ -209,27 +209,31 @@ public class VSensorLoader extends Thread {
         } catch (IllegalAccessException e2) {
             logger.error(e2.getMessage(), e2);
         }
-        try {
-            if (!Main.getStorage(vs).tableExists(vs.getName(), vs.getOutputStructure()))
-                Main.getStorage(vs).executeCreateTable(vs.getName(), vs.getOutputStructure(), pool.getConfig().getIsTimeStampUnique());
-            else
-                logger.info("Reusing the existing " + vs.getName() + " table.");
-        } catch (SQLException e) {
-            if (e.getMessage().toLowerCase().contains("table already exists")) {
-                logger.error(e.getMessage());
-                if (logger.isInfoEnabled()) logger.info(e.getMessage(), e);
-                logger.error("Loading the virtual sensor specified in the file : " + vs.getFileName() + " failed");
-                logger.error("The table : " + vs.getName() + " is exists in the database specified in :" + Main.getContainerConfig().getContainerFileName() + ".");
-                logger.error("Solutions : ");
-                logger.error("1. Change the virtual sensor name, in the : " + vs.getFileName());
-                logger.error("2. Change the URL of the database in " + Main.getContainerConfig().getContainerFileName() + " and choose another database.");
-                logger.error("3. Rename/Move the table with the name : " + Main.getContainerConfig().getContainerFileName() + " in the database.");
-                logger.error("4. Change the overwrite-tables=\"true\" (be careful, this will overwrite all the data previously saved in " + vs.getName() + " table )");
-            } else {
-                logger.error(e.getMessage(), e);
-            }
-            return false;
+        for (gsn.beans.OutputStream o : vs.getOutputStreams()){
+        	try {
+		            if (!Main.getStorage(vs).tableExists(o.getTableName(), o.getStructure()))
+		                Main.getStorage(vs).executeCreateTable(o.getTableName(), o.getStructure(), vs.getIsTimeStampUnique());
+		            else
+		                logger.info("Reusing the existing " + o.getTableName() + " table.");
+
+        	} catch (SQLException e) {
+	            if (e.getMessage().toLowerCase().contains("table already exists")) {
+	                logger.error(e.getMessage());
+	                if (logger.isInfoEnabled()) logger.info(e.getMessage(), e);
+	                logger.error("Loading the virtual sensor specified in the file : " + vs.getFileName() + " failed");
+	                logger.error("The table : " + o.getTableName() + " is exists in the database specified in :" + Main.getContainerConfig().getContainerFileName() + ".");
+	                logger.error("Solutions : ");
+	                logger.error("1. Change the virtual sensor name/output stream name, in the : " + vs.getFileName());
+	                logger.error("2. Change the URL of the database in " + Main.getContainerConfig().getContainerFileName() + " and choose another database.");
+	                logger.error("3. Rename/Move the table with the name : " + Main.getContainerConfig().getContainerFileName() + " in the database.");
+	                logger.error("4. Change the overwrite-tables=\"true\" (be careful, this will overwrite all the data previously saved in " + o.getTableName() + " table )");
+	            } else {
+	                logger.error(e.getMessage(), e);
+	            }
+	            return false;
+        	}
         }
+        
         logger.warn("adding : " + vs.getName() + " virtual sensor[" + vs.getFileName() + "]");
         if (Mappings.addVSensorInstance(pool)) {
             try {

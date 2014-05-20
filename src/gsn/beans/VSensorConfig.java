@@ -556,5 +556,9 @@ public class VSensorConfig implements Serializable {
 		}
 	}
 
+	public Collection<OutputStream> getOutputStreams() {
+		return outputStreamNameToOutputStreamObjectMapping.values();
+	}
+
 
 }
