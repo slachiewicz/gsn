@@ -53,6 +53,7 @@ public abstract class StorageManager {
 
     private static final transient Logger logger = Logger.getLogger(StorageManager.class);
 
+    @Deprecated
     private String databaseDriver;
 
     private BasicDataSource pool;
@@ -798,8 +799,9 @@ public abstract class StorageManager {
      *
      * @return
      */
+    @Deprecated
     public abstract String getJDBCPrefix();
-
+    @Deprecated
     public String getJDBCDriverClass() {
         return databaseDriver;
     }
