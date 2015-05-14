@@ -32,9 +32,7 @@ import gsn.beans.VSensorConfig;
 import gsn.http.rest.DefaultDistributionRequest;
 import gsn.http.rest.DeliverySystem;
 import gsn.http.rest.DistributionRequest;
-import gsn.http.rest.LocalDeliveryWrapper;
 import gsn.networking.zeromq.ZeroMQDelivery;
-import gsn.networking.zeromq.ZeroMQWrapper;
 import gsn.storage.DataEnumerator;
 import gsn.storage.SQLValidator;
 
@@ -43,6 +41,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +51,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import gsn.storage.StorageManager;
 import org.apache.log4j.Logger;
-import org.joda.time.format.ISODateTimeFormat;
 
 public class DataDistributer implements VirtualSensorDataListener, VSensorStateChangeListener, Runnable {
 
@@ -269,8 +267,15 @@ public class DataDistributer implements VirtualSensorDataListener, VSensorStateC
     	synchronized (listeners) {
     		if (Main.getContainerConfig().isZMQEnabled() && getInstance(ZeroMQDelivery.class) == this){
     			try {
-    				DeliverySystem delivery = new ZeroMQDelivery(config);
-					addListener(DefaultDistributionRequest.create(delivery, config, "select * from "+config.getName(),System.currentTimeMillis()));
+                   DeliverySystem delivery = new ZeroMQDelivery(config.getName());
+                   long time = 0;
+                   try{
+                       Connection conn = Main.getStorage(config.getName()).getConnection();
+                       ResultSet resultMax = Main.getStorage(config.getName()).executeQueryWithResultSet(new StringBuilder("select MAX(timed) from ").append(config.getName()), conn);
+                       resultMax.next();
+                       time = resultMax.getLong(1);
+                   }catch(SQLException s){}
+                   addListener(DefaultDistributionRequest.create(delivery, config, "select * from "+config.getName(),time));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {

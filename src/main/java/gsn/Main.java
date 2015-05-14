@@ -101,8 +101,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 //import org.jibx.runtime.IBindingFactory;
 //import org.jibx.runtime.IUnmarshallingContext;
 //import org.jibx.runtime.JiBXException;
-import org.zeromq.ZMQ;
-import org.zeromq.ZMQ.Context;
+import org.zeromq.ZContext;
 import org.eclipse.jetty.server.AbstractConnector;
 
 
@@ -132,7 +131,7 @@ public final class Main {
 	private static StorageManager                         mainStorage;
     private static StorageManager                         windowStorage;
     private static StorageManager                         validationStorage;
-    private static Context                                zmqContext              = ZMQ.context(1);
+    private static ZContext                                zmqContext             = new ZContext();
     private static HashMap<Integer, StorageManager>       storages                = new HashMap<Integer, StorageManager>();
     private static HashMap<VSensorConfig, StorageManager> storagesConfigs         = new HashMap<VSensorConfig, StorageManager>();
     private GSNController                                 controlSocket;
@@ -544,7 +543,7 @@ public final class Main {
         return windowStorage;
     }
     
-    public static Context getZmqContext(){
+    public static ZContext getZmqContext(){
     	return zmqContext;
     }
     

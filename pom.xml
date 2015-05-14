@@ -325,9 +325,11 @@
             <version>2.23.0</version>
         </dependency>
         <dependency>
-            <groupId>org.zeromq</groupId>
+            <groupId>jeromq</groupId>
             <artifactId>jeromq</artifactId>
             <version>0.3.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jeromq-custom.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
