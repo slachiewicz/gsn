@@ -1,0 +1,156 @@
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+
+html,body{
+  	height:100%;
+}
+
+body{
+  	padding-top:0px; /*padding for navbar*/
+}
+
+.navbar-custom .icon-bar {
+	background-color:#fff;
+}
+
+.navbar-custom {
+	background-color: #EF4836;
+    color:#fff;
+}
+
+.navbar-custom li>a:hover,.navbar-custom li>a:focus {
+	background-color:#fff;
+    color : #EF4836;
+}
+
+.navbar-custom a{
+    color:#fefefe;
+}
+
+.navbar-custom .form-control:focus {
+	border-color: #49bfff;
+	outline: 0;
+	-webkit-box-shadow: inset 0 0 0;
+	box-shadow: inset 0 0 0;
+}
+
+#main, #main>.row {
+	height:100%;
+}
+
+#main>.row {
+    overflow-y:scroll;
+}
+
+#left {
+	height:100%;
+    padding: 1%;
+    padding-right:2%;
+}
+
+#map-canvas {
+	
+    height:calc(100% - 0);
+    position:absolute;
+    right:0px;
+    top:50px;
+    bottom:0;
+    overflow:hidden;
+}
+
+#title h2{
+    font-size: 2em;
+    line-height: 0.5emem;
+    margin-bottom:10%;
+
+}
+
+.panel p{
+    padding-left : 5%
+}
+
+.panel-heading {
+    color: #cf2017 !important;
+    font-weight : 300;
+    text-transform: uppercase;
+}
+
+ 
+.filters {
+    width: 150px;
+    height: 150px;
+    background: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 1px solid #999;
+    border-radius: 2px;
+}
+
+
+#main, #main>.row {
+    height:100%;
+}
+
+#main>.row {
+    overflow-y:scroll;
+}
+
+.ng-table {
+    border: 1px solid #000;
+}
+
+.angular-google-map-container{
+
+    height:400px;
+}
+
+.modal { 
+    display: block;
+}
+
+/* Custom dialog/modal headers */
+
+.dialog-header-error { background-color: #d2322d; }
+.dialog-header-wait { background-color: #428bca; }
+.dialog-header-notify { background-color: #eeeeee; }
+.dialog-header-confirm { background-color: #333333; }
+    .dialog-header-error span, .dialog-header-error h4,
+    .dialog-header-wait span, .dialog-header-wait h4,
+    .dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }
+
+/* Ease Display */
+
+.pad { padding: 25px; }
+
+.google-map{width:100%; height:100%;}
+
+#gmaps {
+    width: 100%;
+    height: 550px;
+}
+
+
+.btn-info {
+
+    width: 100%;
+    padding-top: 10px;
+
+}
+
+.btn-default {
+
+    width: 100%;
+    padding-top: 5px;
+
+}
+
+

@@ -1,0 +1,46 @@
+
+<div ng-controller="DetailsCtrl">
+            <div class="input-append">
+                <input type="text" ng-model="query" ng-change="search()" class="input-large search-query" placeholder="Search">
+            <span class="add-on"><i class="icon-search"></i></span>
+            </div>
+            <table class="table table-striped table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="name">Name&nbsp;</th>
+                        <th class="description">Description&nbsp;</th>
+                        <th class="field3">Field 3&nbsp;</th>
+                        <th class="field4">Field 4&nbsp;</th>
+                        <th class="field5">Field 5&nbsp;</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <td colspan="6">
+                        <div class="pagination pull-right">
+                            <ul>
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                                <li ng-repeat="n in range(pagedItems.length)"
+                                    ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+                                <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="detail in details">
+                        <td>{{detail.properties.vs_name}}</td>
+                        <td>{{detail.properties.description}}</td>
+                        <td>{{detail.properties.geographical}}</td>
+                        <td>{{detail.properties.geographical}}</td>
+                        <td>{{detail.properties.geographical}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>

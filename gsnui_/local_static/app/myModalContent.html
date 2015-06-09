@@ -1,0 +1,23 @@
+<div ng-controller="DemoCtrl">
+                                
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Sensor details</h3>
+                                    </div>
+                                    <div class="modal-body">
+                            
+                                            
+                                                
+                                                 Name:   {{ items.properties.vs_name }} 
+
+
+                                                 Description: {{ items.properties.description }}
+                                            
+                                            
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" ng-click="ok(items.properties.vs_name)">Add to dashboard</button>
+                                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                    </div>
+                                
+                                <!-- <div ng-show="selected">Selection from a modal: {{ selected }}</div> -->
+</div>

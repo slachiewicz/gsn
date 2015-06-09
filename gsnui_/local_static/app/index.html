@@ -1,0 +1,196 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+
+    <title>GSN</title>
+
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../app/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../app/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../app/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../app/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../app/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+
+
+    <!-- Material design -->
+    <!-- <link href="css/materialize.min.css" rel="stylesheet">
+    <link href="css/materialize.css" rel="stylesheet"> -->
+
+    <!-- Custom Fonts -->
+    <link href="../app/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--ngTable css -->
+    <link href="../app/bower_components/ng-table/dist/ng-table.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Calling chart scripts 
+    <link rel="stylesheet" href="../app/bower_components/angular-material/angular-material.min.css"> -->
+   <!-- <script src="../app/bower_components/angular-resource/angular-resource.js"></script> 
+    <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script> -->
+
+    <!-- Bootstrap angular script -->
+
+    
+    
+ 
+
+    <!--
+    <script src="//code.angularjs.org/1.3.8/angular-animate.min.js" data-semver="1.3.8"></script>
+    <script src="//code.angularjs.org/1.3.8/angular-sanitize.min.js" data-semver="1.3.8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script> -->
+    <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here 
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+
+    <script src="../app/bower_components/angular-ui-select/dist/select.js"></script>
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"> -->
+
+    <!-- NG map 
+    <script src="//maps.google.com/maps/api/js"></script>
+    <script src="//rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.min.js"></script> -->
+
+    
+
+    <!-- JS (load angular, ui-router, ui-bootstrap, and our custom js file) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../app/bower_components/angular/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="../app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script> 
+    <script src="http://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="../app/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <!-- <script src="http://code.highcharts.com/adapters/standalone-framework.js"></script> -->
+    <script src="js/app.js"></script>
+
+    
+   
+
+</head>
+
+<!-- apply our angular app to our site -->
+<body ng-app="routerApp">
+
+<div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <img src="../app/img/MonteRosa.jpg"></img>
+            <div class="navbar-header">
+            </div>
+            <!-- /.navbar-header -->
+
+           
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                        <li>
+                            <a ui-sref="home"><i class="fa fa-dashboard fa-fw"></i> Homepage</a>
+                        </li>
+                        <li>
+                            <a ui-sref="map"><i class="fa fa-dashboard fa-fw"></i> Map</a>
+                        </li>
+                        <li>
+                            <a ui-sref="dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            
+                        </li>   
+                        <li>
+                            <a ui-sref="graph"><i class="fa fa-bar-chart-o fa-fw"></i> Graph</a>
+                            
+                        </li>                        
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid" id="main">
+                <div class="row content">
+                
+                    
+                        <!-- /.panel-heading -->
+                        
+                            
+                             <div ui-view></div>
+
+                        
+                        <!-- /.panel-body -->
+                    
+                    <!-- /.panel -->
+                
+                </div>
+            <!-- /.container-fluid -->
+            </div>
+        <!-- /#page-wrapper -->
+
+        </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery 
+    <script src="../app/bower_components/jquery/dist/jquery.min.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript 
+    <script src="../app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+
+    <!-- Metis Menu Plugin JavaScript 
+    <script src="../app/bower_components/metisMenu/dist/metisMenu.min.js"></script> -->
+
+    <!-- DataTables JavaScript 
+    <script src="../app/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../app/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script> -->
+
+    <!-- Custom Theme JavaScript 
+    <script src="../app/dist/js/sb-admin-2.js"></script> -->
+
+    <!-- Map -->
+    <!-- script references -->
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    
+
+    <script src='bower_components/lodash/dist/lodash.compat.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script> 
+
+    
+
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference 
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+    </script> -->
+
+    
+
+</body>
+
+</html>

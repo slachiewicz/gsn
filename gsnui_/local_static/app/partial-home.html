@@ -1,0 +1,73 @@
+<h1>Sensor List</h1>
+<div ng-controller="DemoCtrl">
+            <div class="row"><br></div>
+            <div class="row" style="margin-left: 2px">
+                <div class="col-lg-2">
+                <input type="text" class="form-control" style="width: 100%" ng-model="searching.properties.vs_name" placeholder="Search by name">
+                </div>
+                <div class="col-lg-2">
+                <input type="text" class="form-control" style="width: 100%" ng-model="searching.properties.description" placeholder="Search by description">
+                </div>
+                <div class="col-lg-2">
+                <input type="text" class="form-control" style="width: 100%" ng-model="searching.properties.altitude" placeholder="Search by altitude">
+                </div>
+                <div class="col-lg-2">
+                <input type="text" class="form-control" style="width: 100%" ng-model="searching.properties.geographical" placeholder="Search by location">
+                </div>
+                <div class="col-lg-2">
+                <input type="text" class="form-control" style="width: 100%" ng-model="searching.properties.accessProtected" placeholder="Search by access rights">
+                </div>
+            </div>
+            <div class="row"><br></div>
+            <table class="table table-striped table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="name">Name&nbsp;</th>
+                        <th class="description">Parameter&nbsp;</th>
+                        <th class="field3">Altitude&nbsp;</th>
+                        <th class="field4">Location&nbsp;</th>
+                        <th class="field5">Access Protected&nbsp;</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <td colspan="6">
+                        <div class="pagination pull-right">
+                            <ul>
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                                <li ng-repeat="n in range(pagedItems.length)"
+                                    ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+                                <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="sensor in sensors | filter:searching">
+                        <td>{{sensor.properties.vs_name}}</td>
+                        <td>{{sensor.properties.parameter}}</td>
+                        <td>{{sensor.properties.altitude}}</td>
+                        <td>{{sensor.properties.geographical}}</td>
+                        <td>{{sensor.properties.accessProtected}}</td>
+                        <td><button class="btn btn-primary" ng-click="open(sensor.properties.vs_name)">Show</button><td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+        </div>
+
+
+
+
+
+
+
+    <!-- <a ui-sref=".list" class="btn btn-primary">Simplified List</a>
+    <a ui-sref=".filtering" class="btn btn-danger">List with filters</a> -->
